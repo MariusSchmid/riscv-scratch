@@ -99,3 +99,5 @@ fi
 #fi
 
 source /oss-cad/oss-cad-suite/environment
+# gcc risc-v compiler
+export PATH="/opt/riscv32i/riscv/bin:$PATH"
