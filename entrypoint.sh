@@ -1,8 +1,4 @@
-#!/bin/sh
-# ... do some setup ...
-
-
+#!/bin/bash
 # echo "Starting my application..."
-source oss-cad-suite/environment
-# then run the CMD passed as command-line arguments
+# run the CMD passed as command-line arguments
 exec "$@"
