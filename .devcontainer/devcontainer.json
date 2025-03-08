@@ -17,7 +17,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"teros-technology.teroshdl"
+				"teros-technology.teroshdl",
+				"ms-vscode.cmake-tools"
 			],
 		},
 		// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
