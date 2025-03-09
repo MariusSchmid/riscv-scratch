@@ -14,10 +14,14 @@ docker run --rm -it riscv_demo /bin/bash
 
 
 # compile the firmware
-see firmware gcc_command.sh
+cd soc/<xyz>/firmware
+cmake -B build
+cmake --build build
 
-# compile
+# synthesize verilog
+cd soc/<xyz>
 iverilog src/*.v tb_processor.v -o program
+./program
 
 # use GTKWave
 GDK_BACKEND=x11 gtkwave tb_processor.vcd

@@ -5,3 +5,6 @@
 *.map
 dumpfile
 build/
+*.out
+*.vcd
+program
