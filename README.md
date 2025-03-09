@@ -25,3 +25,8 @@ iverilog src/*.v tb_processor.v -o program
 
 # use GTKWave
 GDK_BACKEND=x11 gtkwave tb_processor.vcd
+
+
+# generate registers
+cd ip_generation
+corsair

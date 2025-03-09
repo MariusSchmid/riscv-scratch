@@ -8,7 +8,8 @@ set(MAKEHEX ${CMAKE_CURRENT_SOURCE_DIR}/../../../tools/makehex.py)
 project(example VERSION 1.0 LANGUAGES C ASM)
 
 set(TARGET ${PROJECT_NAME})
-add_executable(${TARGET}.elf code.S main.c)
+# add_executable(${TARGET}.elf code.S)
+add_executable(${TARGET}.elf start.S main.c)
 
 SET(LINKER_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/sections.lds")
 SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -T ${LINKER_SCRIPT} -Wl,--build-id=none,-Bstatic,--strip-debug,-lgcc,-Map=${TARGET}.map")

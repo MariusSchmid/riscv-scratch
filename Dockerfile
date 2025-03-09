@@ -9,8 +9,10 @@ RUN apt-get install -y git
 
 ########## oss-cad #########
 WORKDIR "/oss-cad"
-RUN curl -LJO https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2025-03-05/oss-cad-suite-linux-x64-20250305.tgz
-RUN tar -xf oss-cad-suite-linux-x64-20250305.tgz
+# RUN curl -LJO https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2025-03-05/oss-cad-suite-linux-x64-20250305.tgz
+# RUN tar -xf oss-cad-suite-linux-x64-20250305.tgz
+RUN curl -LJO https://github.com/YosysHQ/oss-cad-suite-build/releases/download/2023-09-02/oss-cad-suite-linux-x64-20230902.tgz
+RUN tar -xf oss-cad-suite-linux-x64-20230902.tgz
 
 
 
