@@ -27,8 +27,9 @@ RUN tar -xvf riscv32-elf.tar.xz
 # RUN tar -xvf riscv32-glibc.tar.xz
 
 
-
-
+######### corsair #########
+RUN apt-get install pipx -y
+RUN pipx install corsair
 COPY .bashrc /root/.bashrc
 
 COPY entrypoint.sh /entrypoint.sh

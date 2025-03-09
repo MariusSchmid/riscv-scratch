@@ -101,3 +101,6 @@ fi
 source /oss-cad/oss-cad-suite/environment
 # gcc risc-v compiler
 export PATH="/opt/riscv32i/riscv/bin:$PATH"
+
+# corsair
+export PATH="/root/.local/share/pipx/venvs/corsair/bin/:$PATH"
