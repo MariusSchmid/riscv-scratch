@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 cd ip
 mkdir -p generated
 cp `ls | grep -v generated` generated #copy everything but not itself
@@ -7,7 +7,7 @@ corsair generated
 cd ..
 
 
-set -e
+
 cd firmware && cmake -B build && cmake --build build
 cd ..
 

@@ -11,6 +11,9 @@ set(TARGET ${PROJECT_NAME})
 # add_executable(${TARGET}.elf code.S)
 add_executable(${TARGET}.elf start.S main.c)
 
+
+target_include_directories(${TARGET}.elf PRIVATE ../ip/generated/sw)
+
 SET(LINKER_SCRIPT "${CMAKE_CURRENT_SOURCE_DIR}/sections.lds")
 SET(CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} -T ${LINKER_SCRIPT} -Wl,--build-id=none,-Bstatic,--strip-debug,-lgcc,-Map=${TARGET}.map")
 

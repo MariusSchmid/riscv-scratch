@@ -1,5 +1,5 @@
 [globcfg]
-base_address = 0
+base_address = 0x40000000
 data_width = 32
 address_width = 32
 register_reset = sync_pos
@@ -9,7 +9,7 @@ force_name_case = none
 regmap_path = regs.yaml
 
 [v_module]
-path = hw/regs.v
+path = hw/gpio_ip.v
 read_filler = 0
 interface = lb
 generator = Verilog
