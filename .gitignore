@@ -8,6 +8,4 @@ build/
 *.out
 *.vcd
 program
-doc/
-hw/
-sw/
+generated
