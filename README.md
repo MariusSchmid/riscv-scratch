@@ -31,10 +31,10 @@ cd soc/i2c_uart_gpio
 |   |-- gpio_corsair    #gpio example using corsair generation (femtorv32)
 |   |-- i2c_uart_gpio   #contains gpio + uart + i2c (femtorv32)
 |   |-- picorv32        #another risc-v implementation
-|   `-- uart_corsair    # gpio + uart (femtorv32)
-`-- tools
+|   |-- uart_corsair    # gpio + uart (femtorv32)
+|-- tools
     |-- makehex.py      #generate hex files from bin files
-    `-- riscv.cmake     #cmake toolchain settings for RISC-V gcc
+    |-- riscv.cmake     #cmake toolchain settings for RISC-V gcc
 ~~~
 
 
