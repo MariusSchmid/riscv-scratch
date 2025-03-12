@@ -1,0 +1,58 @@
+regmap:
+-   name: I2C_WRITE_DATA
+    description: UART Write Data register
+    address: 0
+    bitfields:
+    -   name: DATA_WRITE
+        description: Data To Send Via I2C
+        reset: 0
+        width: 8
+        lsb: 0
+        access: rw
+        hardware: o
+        enums: []
+-   name: I2C_READ_DATA
+    description: UART Read Data register
+    address: 4
+    bitfields:
+    -   name: DATA_READ
+        description: Data To Send Via I2C
+        reset: 0
+        width: 8
+        lsb: 0
+        access: roc
+        hardware: i
+        enums: []
+-   name: I2C_STATUS
+    description: I2C Status register
+    address: 8
+    bitfields:
+    -   name: READY
+        description: I2C is Ready
+        reset: 1
+        width: 1
+        lsb: 5
+        access: ro
+        hardware: i
+        enums: []
+    -   name: TX_DONE
+        description: Done Transmitting The Last Char (8-bit)
+        reset: 0
+        width: 1
+        lsb: 13
+        access: roc
+        hardware: i
+        enums: []
+-   name: I2C_CTRL
+    description: I2C Control register
+    address: 12
+    bitfields:
+    -   name: START
+        description: TX Begin Signal, Valid For Only One Cycle
+        reset: 0
+        width: 1
+        lsb: 9
+        access: wosc
+        hardware: o
+        enums: []
+

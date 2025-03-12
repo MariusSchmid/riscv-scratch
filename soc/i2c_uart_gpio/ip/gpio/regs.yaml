@@ -1,0 +1,14 @@
+regmap:
+-   name: GPIO_0
+    description: General Purpose Register
+    address: 0
+    bitfields:
+    -   name: DATA
+        description: Data To Send To Leds
+        reset: 0
+        width: 32
+        lsb: 0
+        access: rw
+        hardware: o
+        enums: []
+
