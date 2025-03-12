@@ -1,32 +1,25 @@
-# open project in dev container
+# Development environment
+
+## use dev container
 
 
-
-# build and run docker manually
+## build and run docker manually
+~~~
 docker build -t riscv_demo .
 docker run --rm -it riscv_demo /bin/bash
+~~~
 
 
-# teros HDL
+# Settings which are not done automatically
+## teros HDL
 * Set linter to Icarus
 * schematic viewer yosys
 
 
 
-# compile the firmware
-cd soc/<xyz>/firmware
-cmake -B build
-cmake --build build
+# How to compile and run
 
-# synthesize verilog
-cd soc/<xyz>
-iverilog src/*.v tb_processor.v -o program
-./program
-
-# use GTKWave
-GDK_BACKEND=x11 gtkwave tb_processor.vcd
-
-
-# generate registers
-cd ip_generation
-corsair
+~~~
+cd soc/i2c_uart_gpio
+./run.sh
+~~~
