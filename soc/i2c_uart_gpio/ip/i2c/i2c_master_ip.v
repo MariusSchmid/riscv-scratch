@@ -4,37 +4,43 @@ module i2c_master_ip #(
   )(
 
 
-    input in_clk,
-    input rst
+    input clk,
+    input reset_n
     // input [ADDR_W-7:6] waddr
   );
 
-  //   wire [7:0] csr_u_data_data_out;
-  reg start_new_transaction ;
-  // wire out_clk = (CEcount==3'd4);
+  reg [7:0] slave_addr, i_data_write;
+  reg  [15:0] i_sub_addr;
+  // reg clk, reset_n, i_sub_len;
+  reg  i_sub_len;
+  reg request_transmit;
+  reg [23:0] i_byte_len;
+  wire [7:0] data_out;
+  wire valid_out;
+  wire scl;
+  wire sda;
+  wire req_data_chunk, busy, nack;
+  localparam [6:0] I2C_ADDR = 7'h4B;
+  initial
 
-
-  i2c_master i2c_master_inst (
-               .i_clk(in_clk),
-               .reset_n(rst),
-               .i_addr_w_rw(8'b0000000),
-               .i_sub_len(1'b0), //8bit address
-               .i_byte_len(24'b1), //1 byte address len
-               .i_data_write(8'hba),
-               .req_trans(start_new_transaction)
-             );
-
-  // reg [2:0] CEcount;
-  reg[27:0] counter=28'd0;
-  parameter DIVISOR = 28'd100;
-  always@(posedge in_clk)
   begin
-    counter <= counter + 28'd1;
-    if(counter>=(DIVISOR-1))
-      counter <= 28'd0;
-    start_new_transaction <= (counter<DIVISOR/2)?1'b1:1'b0;
+    slave_addr = {I2C_ADDR, 1'b0};
+    i_data_write = 8'hFE;
+    i_sub_addr = 8'h2E;
+    i_sub_len = 1'b0;
+    i_byte_len = 23'd2;
   end
 
+  i2c_master i2c_master_inst (
+               .i_clk(clk),
+               .reset_n(reset_n),
+               .i_addr_w_rw(slave_addr),        //7 bit address, LSB is the read write bit, with 0 being write, 1 being read
+               .i_sub_addr(i_sub_addr),         //contains sub addr to send to slave, partition is decided on bit_sel
+               .i_sub_len(i_sub_len),           //denotes whether working with an 8 bit or 16 bit sub_addr, 0 is 8bit, 1 is 16 bit
+               .i_byte_len(i_byte_len),         //denotes whether a single or sequential read or write will be performed (denotes number of bytes to read or write)
+               .i_data_write(i_data_write),     //Data to write if performing write action
+               .req_trans(1'b1)    //denotes when to start a new transaction
+             );
 
 
 endmodule

@@ -28,7 +28,8 @@ cd ..
 # iverilog src/*.v tb_processor.v   -o program
 iverilog \
     src/*.v tb_processor.v  \
-    ip/i2c/*.v \
+    ip/i2c/i2c_master_ip.v \
+    ip/i2c/i2c_master.v \
     ip/i2c/generated/hw/*.v \
     ip/uart/*.v  \
     ip/uart/generated/hw/*.v \
@@ -40,5 +41,5 @@ if [ $? == 0 ]; then
    echo "matched"
    exit 1
 fi
-set -e
+# set -e
 GDK_BACKEND=x11 gtkwave tb_processor.vcd --script=waves.tcl

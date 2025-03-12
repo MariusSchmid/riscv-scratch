@@ -51,15 +51,21 @@ module i2c_test_bench();
 
 
 
-  i2c_master DUT(.i_clk(clk),                     //input clock to the module @100MHz (or whatever crystal you have on the board)
-                 .reset_n(reset_n),               //reset for creating a known start condition
-                 .i_addr_w_rw({I2C_ADDR, 1'b0}),        //7 bit address, LSB is the read write bit, with 0 being write, 1 being read
-                 .i_sub_addr(8'h2E),         //contains sub addr to send to slave, partition is decided on bit_sel
-                 .i_sub_len(1'b0),           //denotes whether working with an 8 bit or 16 bit sub_addr, 0 is 8bit, 1 is 16 bit
-                 .i_byte_len(24'd2),         //denotes whether a single or sequential read or write will be performed (denotes number of bytes to read or write)
-                 .i_data_write(8'hFE),     //Data to write if performing write action
-                 .req_trans(1'b1)    //denotes when to start a new transaction
-                );
+  // i2c_master DUT(.i_clk(clk),                     //input clock to the module @100MHz (or whatever crystal you have on the board)
+  //                .reset_n(reset_n),               //reset for creating a known start condition
+  //                .i_addr_w_rw({I2C_ADDR, 1'b0}),        //7 bit address, LSB is the read write bit, with 0 being write, 1 being read
+  //                .i_sub_addr(8'h2E),         //contains sub addr to send to slave, partition is decided on bit_sel
+  //                .i_sub_len(1'b0),           //denotes whether working with an 8 bit or 16 bit sub_addr, 0 is 8bit, 1 is 16 bit
+  //                .i_byte_len(24'd2),         //denotes whether a single or sequential read or write will be performed (denotes number of bytes to read or write)
+  //                .i_data_write(8'hFE),     //Data to write if performing write action
+  //                .req_trans(1'b1)    //denotes when to start a new transaction
+  //               );
 
+  i2c_master_ip DUT(
+                  .clk(clk),
+                  .reset_n(reset_n)
+
+
+                );
 endmodule
 
