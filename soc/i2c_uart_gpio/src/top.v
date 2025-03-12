@@ -2,7 +2,9 @@ module top (
     input clk,
     input reset_n,
     output  [4:0] leds,
-    output uart_tx
+    output uart_tx,
+    inout i2c_scl,
+    inout i2c_sda
   );
 
   parameter MEM_FILE = "firmware/build/i2c_uart_gpio.hex";
@@ -13,24 +15,27 @@ module top (
   wire [31:0] mem_addr;
   wire [31:0] mem_wdata;
   wire [3:0] mem_wstrb;
-  wire [31:0] mem_rdata, rdata_gpio, rdata_uart;
+  wire [31:0] mem_rdata, rdata_gpio, rdata_uart, rdata_i2c;
 
   wire s0_sel_mem;
   wire s1_sel_gpio;
   wire s2_sel_uart;
+  wire s3_sel_i2c;
 
   reg [31:0] processor_rdata;
 
   always @(*)
   begin
     processor_rdata = 32'h0;
-    case ({s2_sel_uart, s1_sel_gpio, s0_sel_mem})
-      3'b001:
+    case ({s3_sel_i2c, s2_sel_uart, s1_sel_gpio, s0_sel_mem})
+      4'b0001:
         processor_rdata = mem_rdata;
-      3'b010:
+      4'b0010:
         processor_rdata = rdata_gpio;
-      3'b100:
+      4'b0100:
         processor_rdata = rdata_uart;
+      4'b1000:
+        processor_rdata = rdata_i2c;
     endcase
   end
 
@@ -101,14 +106,27 @@ module top (
 
   i2c_master_ip i2c_master_unit(
                   .clk(clk),
-                  .reset_n(reset_n)
+                  .reset_n(reset_n),
+                  .scl(i2c_scl),
+                  .sda(i2c_sda),
+
+                  // Local Bus
+                  .waddr({4'h0, mem_addr[27:0]}),
+                  .wdata(mem_wdata),
+                  .wen(s3_sel_i2c & (|mem_wstrb)),
+                  .wstrb(mem_wstrb),
+                  .wready(),
+                  .raddr({4'h0, mem_addr[27:0]}),
+                  .ren(s3_sel_i2c & mem_rstrb),
+                  .rvalid()
                 );
 
   device_select dv_sel(
                   .addr(mem_addr),
                   .s0_sel_mem(s0_sel_mem),
                   .s1_sel_gpio(s1_sel_gpio),
-                  .s2_sel_uart(s2_sel_uart)
+                  .s2_sel_uart(s2_sel_uart),
+                  .s3_sel_i2c(s3_sel_i2c)
                 );
 
 endmodule
