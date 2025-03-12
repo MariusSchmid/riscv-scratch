@@ -1,39 +1,8 @@
-`timescale 1fs/1fs
-module tb_processor();
-  //Slave address of ADT7420
+`default_nettype none
+
+module tb_processor;
   reg clk;
   reg reset_n;
-  //Here do 100MHz clock
-  initial
-  begin
-    clk = 0;
-    forever
-      #(5000000) clk = !clk;  //100MHz clock
-  end
-
-  //   assign sda = en_sda ? test_sda : 1'bz;
-
-  integer i;
-  initial
-  begin
-    $dumpfile("tb_processor.vcd");
-    $dumpvars(0, tb_processor);
-  end
-
-
-  //run test here
-  initial
-  begin
-    /************** Setup of test *****************/
-    // en_sda = 0;
-    reset_n = 0;
-    // test_data_in = 0;
-    // test_data_out = 8'hBE;
-    #100;
-    reset_n = 1;
-    // #10000;
-  end
-
 
 
   top dut(
@@ -41,6 +10,29 @@ module tb_processor();
         .clk (clk)
       );
 
+  localparam CLK_PERIOD = 10;
+  always #(CLK_PERIOD/2) clk=~clk;
+
+  initial
+  begin
+    $dumpfile("tb_processor.vcd");
+    $dumpvars(0, tb_processor);
+  end
+
+  initial
+  begin
+    #1 reset_n<=1'bx;
+    clk<=1'bx;
+    #(CLK_PERIOD*3) reset_n<=1;
+    #(CLK_PERIOD*3) reset_n<=0;
+    clk<=0;
+    repeat(5) @(posedge clk);
+    reset_n<=1;
+    @(posedge clk);
+    repeat(2000) @(posedge clk);
+    // repeat(20000) @(posedge clk);
+    $finish(2);
+  end
+
 endmodule
-
-
+`default_nettype wire
