@@ -1,6 +1,6 @@
-# Development environment
+# How to setup environment
 
-## dev container
+## (Recommended) dev container
 This project contains devcontainer.json. Use VS Code dev container plugin for easy environment setup.
 
 ## (Optional) build and run docker manually

@@ -5,7 +5,7 @@ module top (
     output uart_tx
   );
 
-  parameter MEM_FILE = "firmware/build/example.hex";
+  parameter MEM_FILE = "firmware/build/i2c_uart_gpio.hex";
 
   wire mem_rstrb;
   wire mem_instr;

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "gpio_regs.h"
 #include "uart_regs.h"
+#include "i2c_regs.h"
 
 void uart_send_char(uint8_t my_char)
 {
@@ -20,10 +21,11 @@ void uart_send_str(uint8_t *my_str)
     }
 }
 
-// assume 5 cycles per empty loop iteration
-// assume the clock is 12 MHz, 83.33 ns per clock period
-// for 0.5 sec delay we need 6 million cycles
-// this means we need 1.2 million iteration
+void i2c_write(uint8_t slave_addr, const uint8_t *data, uint32_t length)
+{
+    // while (I2C->I2C_STATUS_bf.READY == 0)
+    //     ;
+}
 
 void delay_long()
 {
@@ -49,8 +51,8 @@ int main()
     while (1)
     {
         GCSR->GPIO_0 = 0x55;
-        delay_short();
+        delay_long();
         GCSR->GPIO_0 = 0xaa;
-        delay_short();
+        delay_long();
     }
 }

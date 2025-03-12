@@ -3,10 +3,8 @@ set -e
 
 
 mkdir -p generated
-cp `ls | grep -v generated` generated #copy everything but not itself
+cp `ls | grep -v generated test` generated #copy everything but not itself
 corsair generated
-
-
 
 
 # iverilog src/*.v tb_processor.v   -o program

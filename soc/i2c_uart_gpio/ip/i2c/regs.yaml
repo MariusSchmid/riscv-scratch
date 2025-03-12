@@ -1,31 +1,37 @@
 regmap:
--   name: I2C_WRITE_DATA
-    description: UART Write Data register
+
+-   name: I2C_CTRL
+    description: I2C Control register
     address: 0
     bitfields:
-    -   name: DATA_WRITE
-        description: Data To Send Via I2C
+    -   name: START
+        description: Write 1 to trigger the start of a transmission.
+        reset: 0
+        width: 1
+        lsb: 0
+        access: wosc
+        hardware: o
+        enums: []
+    -   name: NBYTES
+        description: number of bytes to send
         reset: 0
         width: 8
-        lsb: 0
+        lsb: 1
         access: rw
         hardware: o
         enums: []
--   name: I2C_READ_DATA
-    description: UART Read Data register
-    address: 4
-    bitfields:
-    -   name: DATA_READ
-        description: Data To Send Via I2C
+    -   name: SLAVE_ADDR
+        description: Slave address
         reset: 0
-        width: 8
-        lsb: 0
-        access: roc
-        hardware: i
+        width: 7
+        lsb: 9
+        access: rw
+        hardware: o
         enums: []
+
 -   name: I2C_STATUS
     description: I2C Status register
-    address: 8
+    address: 4
     bitfields:
     -   name: READY
         description: I2C is Ready
@@ -43,16 +49,31 @@ regmap:
         access: roc
         hardware: i
         enums: []
--   name: I2C_CTRL
-    description: I2C Control register
-    address: 12
+
+-   name: I2C_TXDR
+    description: I2C Write Data register
+    address: 8
     bitfields:
-    -   name: START
-        description: TX Begin Signal, Valid For Only One Cycle
+    -   name: TXDATA
+        description: data to be transmitted
         reset: 0
-        width: 1
-        lsb: 9
-        access: wosc
+        width: 8
+        lsb: 0
+        access: rw
         hardware: o
         enums: []
+        
+-   name: I2C_RXDR
+    description: I2C Read Data register
+    address: 12
+    bitfields:
+    -   name: RXDATA
+        description: data received from i2c
+        reset: 0
+        width: 8
+        lsb: 0
+        access: roc
+        hardware: i
+        enums: []
+
 

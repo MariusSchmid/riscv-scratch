@@ -17,7 +17,7 @@ generator = Verilog
 
 [v_header]
 path = hw/i2c_regs.vh
-prefix = UCSR
+prefix = I2C
 generator = VerilogHeader
 
 
