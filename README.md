@@ -27,8 +27,6 @@ cd soc/i2c_uart_gpio
 ├── Dockerfile
 ├── README.md
 ├── entrypoint.sh
-├── gowin
-│   └── fpga_project
 ├── soc                 # contains different projects
 │   ├── femtorv32       # very simple risc-v implementation 
 │   ├── gpio_corsair    # gpio example using corsair generation (femtorv32)
