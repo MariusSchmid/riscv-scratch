@@ -12,11 +12,19 @@ regmap:
         access: wosc
         hardware: o
         enums: []
+    -   name: DIR
+        description: 0 to write data. 1 to read data
+        reset: 0
+        width: 1
+        lsb: 1
+        access: rw
+        hardware: o
+        enums: []
     -   name: NBYTES
         description: number of bytes to send
         reset: 0
         width: 8
-        lsb: 1
+        lsb: 2
         access: rw
         hardware: o
         enums: []
@@ -24,7 +32,7 @@ regmap:
         description: Slave address
         reset: 0
         width: 7
-        lsb: 9
+        lsb: 10
         access: rw
         hardware: o
         enums: []
@@ -37,16 +45,24 @@ regmap:
         description: I2C is Ready
         reset: 1
         width: 1
-        lsb: 5
+        lsb: 0
         access: ro
         hardware: i
         enums: []
-    -   name: TX_DONE
-        description: Done Transmitting The Last Char (8-bit)
+    -   name: NAK
+        description: Acknowledge bit was received. Must be cleared by software.
         reset: 0
         width: 1
-        lsb: 13
-        access: roc
+        lsb: 1
+        access: rw
+        hardware: i
+        enums: []    
+    -   name: VALIDOUT
+        description: valid master output
+        reset: 0
+        width: 1
+        lsb: 2
+        access: rw
         hardware: i
         enums: []
 
@@ -62,7 +78,7 @@ regmap:
         access: rw
         hardware: o
         enums: []
-        
+
 -   name: I2C_RXDR
     description: I2C Read Data register
     address: 12
