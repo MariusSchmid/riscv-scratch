@@ -100,6 +100,11 @@ module top (
 
           );
 
+  i2c_master_ip i2c_master_unit(
+                  .in_clk(clk),
+                  .rst(!reset_n)
+                );
+
   device_select dv_sel(
                   .addr(mem_addr),
                   .s0_sel_mem(s0_sel_mem),

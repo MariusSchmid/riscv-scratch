@@ -29,7 +29,8 @@ module tb_processor;
     repeat(5) @(posedge clk);
     reset_n<=1;
     @(posedge clk);
-    repeat(20000) @(posedge clk);
+    repeat(2000) @(posedge clk);
+    // repeat(20000) @(posedge clk);
     $finish(2);
   end
 
