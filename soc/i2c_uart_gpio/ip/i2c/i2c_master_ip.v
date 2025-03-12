@@ -20,8 +20,6 @@ module i2c_master_ip #(
     input               ren,
     output [DATA_W-1:0] rdata,
     output              rvalid
-
-
   );
 
 
