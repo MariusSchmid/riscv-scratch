@@ -101,6 +101,7 @@ module i2c_master_ip #(
                .valid_out(i2c_status_validout),
                .nack(i2c_status_nak),
                .busy(i2c_status_ready),
+               //  .req_trans(1'b1)    //denotes when to start a new transaction
                .req_trans(i2c_ctrl_start)    //denotes when to start a new transaction
 
              );

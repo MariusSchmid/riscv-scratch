@@ -1,5 +1,5 @@
 `default_nettype none
-
+`timescale 1ns/1ns
 module tb_processor;
   reg clk;
   reg reset_n;
@@ -10,7 +10,7 @@ module tb_processor;
         .clk (clk)
       );
 
-  localparam CLK_PERIOD = 10;
+  localparam CLK_PERIOD = 33;
   always #(CLK_PERIOD/2) clk=~clk;
 
   initial
@@ -29,7 +29,7 @@ module tb_processor;
     repeat(5) @(posedge clk);
     reset_n<=1;
     @(posedge clk);
-    repeat(2000) @(posedge clk);
+    repeat(20000) @(posedge clk);
     // repeat(20000) @(posedge clk);
     $finish(2);
   end

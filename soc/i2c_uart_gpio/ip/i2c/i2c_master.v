@@ -100,7 +100,7 @@ module i2c_master(input             i_clk,              //input clock to the mod
              RELEASE_BUS = 4'hB;
 
   //Modify These Parameters for other targets
-  localparam [15:0] DIV_100MHZ = 16'd1000;         //desire 400KHz, have 100MHz, thus (1/(400*10^3)*100*10^6)/2, note div by 2 is for need to change in cycle
+  localparam [15:0] DIV_100MHZ = 16'd38;         //desire 400KHz, have 30MHz, thus (1/(400*10^3)*30*10^6)/2, note div by 2 is for need to change in cycle
   // localparam [15:0] DIV_100MHZ = 16'd125;         //desire 400KHz, have 100MHz, thus (1/(400*10^3)*100*10^6)/2, note div by 2 is for need to change in cycle
   localparam [7:0]  START_IND_SETUP  = 70,  //Time before negedge of scl
              START_IND_HOLD   = 60,  //Time after posedge of clock when start occurs (not used)

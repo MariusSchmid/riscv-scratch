@@ -1,5 +1,5 @@
 module top (
-    input clk,
+    input clk, //30 MHz
     input reset_n,
     output  [4:0] leds,
     output uart_tx,
