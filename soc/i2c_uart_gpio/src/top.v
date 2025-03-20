@@ -106,7 +106,7 @@ module top (
 
   i2c_master_ip i2c_master_unit(
                   .clk(clk),
-                  .reset_n(reset_n),
+                  .rst(!reset_n),
                   .scl(i2c_scl),
                   .sda(i2c_sda),
 

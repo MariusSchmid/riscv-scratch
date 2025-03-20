@@ -7,11 +7,21 @@ lappend signals clk
 
 lappend signals scl
 lappend signals sda
+lappend signals i2c_status_busy
+lappend signals i2c_ctrl_start
+lappend signals i2c_ctrl_dir
 
-# lappend signals mem_addr
-# lappend signals mem_valid
-# lappend signals mem_instr
-# lappend signals reg_pc
+lappend signals mem_addr
+lappend signals mem_valid
+lappend signals mem_rdata
+lappend signals PC
+
+
+lappend signals s0_sel_mem
+lappend signals s1_sel_gpio
+lappend signals s2_sel_uart
+lappend signals s3_sel_i2c
+
 # lappend signals mem_rdata
 # lappend signals mem_wdata
 # lappend signals mem_wmask
@@ -30,4 +40,4 @@ lappend signals sda
 # lappend signals s1_sel_leds
 
 gtkwave::addSignalsFromList $signals
-gtkwave::setZoomRangeTimes 0 600ns
+gtkwave::setZoomRangeTimes 2us 3us

@@ -6,7 +6,7 @@ module i2c_master_ip #(
 
 
     input clk,
-    input reset_n,
+    input rst,
     inout scl,
     inout sda,
 
@@ -29,7 +29,7 @@ module i2c_master_ip #(
   wire i2c_ctrl_dir;
   wire [7:0] i2c_ctrl_nbytes;
   wire [6:0] i2c_ctrl_slave_addr;
-  wire i2c_status_ready;
+  wire i2c_status_busy;
   wire i2c_status_nak;
   wire i2c_status_validout;
   wire [7:0] i2c_txdr_txdata;
@@ -45,7 +45,7 @@ module i2c_master_ip #(
              .csr_i2c_ctrl_dir_out(i2c_ctrl_dir),
              .csr_i2c_ctrl_nbytes_out(i2c_ctrl_nbytes),
              .csr_i2c_ctrl_slave_addr_out(i2c_ctrl_slave_addr),
-             .csr_i2c_status_ready_in(i2c_status_ready),
+             .csr_i2c_status_busy_in(i2c_status_busy),
              .csr_i2c_status_nak_in(i2c_status_nak),
              .csr_i2c_status_validout_in(i2c_status_validout),
              .csr_i2c_txdr_txdata_out(i2c_txdr_txdata),
@@ -64,29 +64,11 @@ module i2c_master_ip #(
 
            );
 
-  // reg [7:0] slave_addr, i_data_write;
-  // reg  [15:0] i_sub_addr;
-  // // reg clk, reset_n, i_sub_len;
-  // reg  i_sub_len;
-  // reg request_transmit;
-  // reg [23:0] i_byte_len;
-  // wire [7:0] data_out;
-  // wire valid_out;
-  // wire req_data_chunk, busy, nack;
-  // localparam [6:0] I2C_ADDR = 7'h4B;
-  // initial
 
-  // begin
-  //   slave_addr = {I2C_ADDR, 1'b0};
-  //   i_data_write = 8'hFE;
-  //   i_sub_addr = 8'h2E;
-  //   i_sub_len = 1'b0;
-  //   i_byte_len = 23'd2;
-  // end
 
   i2c_master i2c_master_inst (
                .i_clk(clk),
-               .reset_n(reset_n),
+               .reset_n(!rst),
 
                .scl_o(scl),
                .sda_o(sda),
@@ -100,7 +82,7 @@ module i2c_master_ip #(
                .data_out(i2c_rxdr_rxdata),
                .valid_out(i2c_status_validout),
                .nack(i2c_status_nak),
-               .busy(i2c_status_ready),
+               .busy(i2c_status_busy),
                //  .req_trans(1'b1)    //denotes when to start a new transaction
                .req_trans(i2c_ctrl_start)    //denotes when to start a new transaction
 
